@@ -16,7 +16,7 @@ jobs:
       # grab changelog
       - name: Write latest commit message to CHANGELOG.md
         run: |
-          echo "$(git log -1 --pretty=format:'%s')" > TEMP.md
+          echo "$(git log -1 --pretty=format:'%B')" > TEMP.md
 
       # upload zip and TEMP.md as changelog
       - name: Upload new release
