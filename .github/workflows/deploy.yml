@@ -19,4 +19,4 @@ jobs:
           body_path: CHANGELOG.txt
           repository: NeutralPlasma/test_deploy_repo
           files: README.md
-          # token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
