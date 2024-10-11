@@ -10,11 +10,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    
+    env:
+      SETUP_PACKAGE_PATH: "test.zip"
+
     steps:
       - uses: actions/checkout@v4
 
       # grab changelog
-      - name: Write latest commit message to CHANGELOG.md
+      - name: Write latest commit message to TEMP.md
         run: |
           echo "$(git log -1 --pretty=format:'%B')" > TEMP.md
 
@@ -25,5 +30,5 @@ jobs:
         with:
           body_path: TEMP.md
           repository: NeutralPlasma/test_deploy_repo
-          files: test.zip
+          files: "${{env.SETUP_PACKAGE_PATH}}"
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
