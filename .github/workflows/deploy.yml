@@ -1,20 +1,29 @@
 name: "Deploy"
 
+
 on:
   push:
     tags:
       - "v*.*.*"
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # grab changelog
+      - name: Write latest commit message to CHANGELOG.md
+        run: |
+          echo "$(git log -1 --pretty=format:'%s')" > TEMP.md
+
+      # upload zip and TEMP.md as changelog
       - name: Upload new release
         id: upload-release-asset
         uses: softprops/action-gh-release@v2
         with:
-          generate_release_notes: true
+          body_path: TEMP.md
           repository: NeutralPlasma/test_deploy_repo
           files: test.zip
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
