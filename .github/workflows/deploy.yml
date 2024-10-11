@@ -1,11 +1,9 @@
 name: "Deploy"
 
-
 on:
   push:
     tags:
       - "v*.*.*"
-
 
 jobs:
   build:
@@ -17,7 +15,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          body_path: CHANGELOG.txt
           repository: NeutralPlasma/test_deploy_repo
           files: test.zip
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
