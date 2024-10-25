@@ -14,7 +14,7 @@ jobs:
     env:
       PROJECT_NAME: "githubTesting"
       INSTALLER_PROJECT_NAME: "Setup/Setup"
-      SETUP_PACKAGE_PATH: "Setup/Setup/bin/x64/Release/en-US"
+      SETUP_PACKAGE_PATH: "Setup/Setup/bin/Release/en-US"
 
 
 
@@ -61,6 +61,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           body_path: TEMP.md
-          repository: DanielPukel/Mfc.Wpf.Setup
+          repository: NeutralPlasma/test_deploy_repo
           files: "${{ env.SETUP_PACKAGE_PATH }}/release.zip"
           token: ${{ secrets.PUBLIC_ACCESS_TOKEN }}
