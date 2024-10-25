@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     env:
       PROJECT_NAME: "githubTesting"
@@ -21,12 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-          # grab changelog
+      # Grab changelog
       - name: Write latest commit message to TEMP.md
         run: |
           echo "$(git log -1 --pretty=format:'%B')" > TEMP.md
 
-      # setup dotnet
+      # Setup .NET 8.0
       - name: Setup .NET 8.0
         uses: actions/setup-dotnet@v4
         with:
@@ -36,25 +36,31 @@ jobs:
         run: |
           dotnet tool install --global wix
 
+
+      # Add dependencies source
       - name: Add dependencies source
         run: dotnet nuget add source --name Echo https://nuget.echoinstruments.eu/v3/index.json
 
-      - name: "Build project"
-        run: dotnet build --configuration Release ${{env.PROJECT_NAME}}
+      # Build project
+      - name: Build project
+        run: dotnet build --configuration Release ${{ env.PROJECT_NAME }}
 
-      - name: "Build installer"
-        run: dotnet build --configuration Release ${{env.INSTALLER_PROJECT_NAME}}
+      # Build installer
+      - name: Build installer
+        run: dotnet build --configuration Release ${{ env.INSTALLER_PROJECT_NAME }}
 
+      # Zip installer
       - name: Zip installer
         run: |
-          cd ${{env.SETUP_PACKAGE_PATH}}
-          zip -r release.zip
+          cd "${{ env.SETUP_PACKAGE_PATH }}"
+          powershell Compress-Archive -Path * -DestinationPath release.zip
 
+      # Upload new release
       - name: Upload new release
         id: upload-release-asset
         uses: softprops/action-gh-release@v2
         with:
           body_path: TEMP.md
-          repository: NeutralPlasma/test_deploy_repo
-          files: "${{env.SETUP_PACKAGE_PATH}}/release.zip"
-          token: ${{ secrets.CUSTOM_GITHUB_TOKEN}}
+          repository: DanielPukel/Mfc.Wpf.Setup
+          files: "${{ env.SETUP_PACKAGE_PATH }}/release.zip"
+          token: ${{ secrets.PUBLIC_ACCESS_TOKEN }}
