@@ -1,0 +1,29 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="SetupComponents" Directory="INSTALLFOLDER">
+		
+		<!-- TODO: custom dialog for setup? -->
+		
+		<Component Id="ProgramFilesShortcut" Guid="9831f1d5-9ee6-4b69-a3a0-613a80d6b84d">
+			<Shortcut Id="GithubTesting"
+				 Directory="DesktopFolder"
+				 Name="MFC App"
+				 WorkingDirectory="INSTALLFOLDER"
+				 Target="[INSTALLFOLDER][ExecutableName]"
+				 >
+				<Icon Id="Logo" SourceFile="LOGO.ico"/>
+				
+				
+			</Shortcut>
+
+			<RegistryKey Root="HKCU" Key="Software\[Manufacturer]\[ApplicationName]">
+				<RegistryValue Name="Installed" Value="1" KeyPath="yes" />
+			</RegistryKey>
+			
+		</Component>
+
+		<ComponentGroupRef Id="ProgramFiles" />
+		
+    </ComponentGroup>
+  </Fragment>
+</Wix>

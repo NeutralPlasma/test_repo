@@ -1,0 +1,17 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="GithubTesting" Manufacturer="EchoInstruments d.o.o." Version="1.0.0.0" UpgradeCode="42028f85-f177-4bb4-91e8-ecf2b8ecacc0">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+	  
+	<WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
+	<WixVariable Id="WixUIBannerBmp" Value="LOGO.png" />
+	  
+	  
+	<Property Id="ApplicationName" Value="!(bind.Property.ProductName)"/>
+	<Property Id="ExecutableName" Value="githubTesting.exe"/>
+	  
+    <Feature Id="Main">
+        <ComponentGroupRef Id="SetupComponents" />
+    </Feature>
+	  
+  </Package>
+</Wix>

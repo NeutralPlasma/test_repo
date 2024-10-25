@@ -1,0 +1,27 @@
+﻿<Project Sdk="WixToolset.Sdk/5.0.2">
+	<PropertyGroup>
+		<OutputName>setup</OutputName>
+		<OutputType>Package</OutputType>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="WixToolset.Heat" Version="5.0.2" />
+		<PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\githubTesting\githubTesting.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<!-- CHANGE HARVEST DIRECTORY BASED ON PROJECT -->
+		<!-- this is used so all the dll and required files are added automatically when building msi file so you're not required to add each file manually!-->
+		<HarvestDirectory Include="$(MSBuildThisFileDirectory)..\..\githubTesting\bin\$(Configuration)\net8.0">
+			<DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+			<ComponentGroupName>ProgramFiles</ComponentGroupName>
+			<SuppressRootDirectory>true</SuppressRootDirectory>
+		</HarvestDirectory>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)/LOGO.ico" />
+		<None Include="$(MSBuildThisFileDirectory)/eula.rtf" />
+		<None Include="$(MSBuildThisFileDirectory)/LOGO.png" />
+	</ItemGroup>
+</Project>
