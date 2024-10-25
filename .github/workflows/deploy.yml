@@ -63,4 +63,4 @@ jobs:
           body_path: TEMP.md
           repository: NeutralPlasma/test_deploy_repo
           files: "${{ env.SETUP_PACKAGE_PATH }}/release.zip"
-          token: ${{ secrets.PUBLIC_ACCESS_TOKEN }}
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
